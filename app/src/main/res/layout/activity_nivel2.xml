@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bt_valida"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Nivel2Activity">
+
+    <TextView
+        android:id="@+id/textView_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="9dp"
+        android:text="@string/jogador_nome"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/total_score"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_vidas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="63dp"
+        android:text="@string/et_vidas"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView_vidas"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/textView_vidas"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginBottom="-2dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/tresvidas" />
+
+    <ImageView
+        android:id="@+id/imageView_NumUn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="115dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/zero" />
+
+    <ImageView
+        android:id="@+id/imageView_signo"
+        android:layout_width="94dp"
+        android:layout_height="94dp"
+        android:layout_alignTop="@+id/imageView_NumDois"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_toStartOf="@+id/imageView_NumDois"
+        android:layout_toLeftOf="@+id/imageView_NumDois"
+        android:layout_toEndOf="@+id/imageView_NumUn"
+        android:layout_toRightOf="@+id/imageView_NumUn"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/adiciona" />
+
+    <ImageView
+        android:id="@+id/imageView_NumDois"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/zero" />
+
+    <EditText
+        android:id="@+id/editText_resultado"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:importantForAutofill="no"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="118dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginTop="254dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginRight="142dp"
+        android:layout_marginBottom="217dp"
+        android:ems="10"
+        android:hint="@string/et_resposta"
+        android:inputType="number" tools:targetApi="o"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView_NumDois"
+        android:layout_alignRight="@+id/imageView_NumDois"
+        android:layout_alignBottom="@+id/editText_resultado"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="-4dp"
+        android:onClick="Comparar"
+        android:text="@string/bt_somar"
+        android:textColor="@color/colorPrimaryDark"
+        tools:ignore="RtlCompat" />
+
+</RelativeLayout>
