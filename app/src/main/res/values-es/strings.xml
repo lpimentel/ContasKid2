@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">CuentasKid</string>
+    <string name="et_nome">Introduce tu nombre</string>
+    <string name="bt_jogar">Jugar</string>
+    <string name="et_vidas">Vidas:</string>
+    <string name="jogador_nome">Jugador:</string>
+    <string name="total_score">Score: 0</string>
+    <string name="bt_somar">Comprobar</string>
+    <string name="et_resposta">Respuesta</string>
+    <string name="toast_introduzNome">Primero introduce tu nombre</string>
+    <string name="Toast_NiveUM">Nivel 1 - Somas simples</string>
+    <string name="Toast_DuasVidas">Tienes dos vidas</string>
+    <string name="Toast_UmaVida">Tienes una vida</string>
+    <string name="Toast_SemVidas">Perdeste todas as vidas</string>
+    <string name="Toast_IndicaResposta">Perdiste todas las vidas</string>
+    <string name="Toast_NivelDois">Nivel 2 - Somas moderados</string>
+    <string name="Toast_NiveTres">Nivel 3 - Sustracciones</string>
+    <string name="Toast_NivelQuatro">Nivel 4 - Somas e Subtrações</string>
+    <string name="Toast_NiveCinco">Nivel 5 - Somas y substracciones</string>
+    <string name="Toast_NivelSeis">Nivel 6 - Somas, substracciones y multiplicaciones</string>
+    <string name="else_IndicaResposta">Iindica tu respuesta</string>
+</resources>

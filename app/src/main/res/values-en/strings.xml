@@ -1,0 +1,22 @@
+<resources>
+<string name="app_name">NumbersKid</string>
+<string name="et_nome">Enter your name</string>
+<string name="bt_jogar">Play</string>
+<string name="et_vidas">Lives:</string>
+<string name="jogador_nome">Player:</string>
+<string name="total_score">Score: 0</string>
+<string name="bt_somar">Check</string>
+<string name="et_resposta">Answer</string>
+<string name="toast_introduzNome">First enter your name</string>
+<string name="Toast_NiveUM">Level 1 - Simple Adding Accounts</string>
+<string name="Toast_DuasVidas">You have two lives</string>
+<string name="Toast_UmaVida">Tens uma vida</string>
+<string name="Toast_SemVidas">You lost all lives</string>
+<string name="Toast_IndicaResposta">Indicate your answer</string>
+<string name="Toast_NivelDois">Level 2 - Moderate Accounts</string>
+<string name="Toast_NiveTres">Level 3 - Subtractions</string>
+<string name="Toast_NivelQuatro">Level 4 - Sums and Subtractions</string>
+<string name="Toast_NiveCinco">Nivel 5 - Multiplicações</string>
+<string name="Toast_NivelSeis">Level 6 - Multiplications</string>
+<string name="else_IndicaResposta">Indicate your answer</string>
+</resources>
