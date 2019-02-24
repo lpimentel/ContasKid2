@@ -14,7 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-//** Declaração dos objetos para cada campo **//
+
+    //** Declaração dos objetos para cada campo **//
 
     private EditText et_nome;
     private ImageView iv_personagem;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer mp;
 
 
-    //** Declaração de variavel tipo inteiro com casting **//
+    //** Declaração de variável tipo inteiro com casting **//
 
     int num_aleatorio = (int) (Math.random() * 10);
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//** Relação entre a parte lógica e gráfica **//
+    //** Relação entre a parte lógica e a parte gráfica **//
         et_nome = (EditText)findViewById(R.id.txt_nome);
         iv_personagem = (ImageView)findViewById(R.id.imageView_Personagem);
         tv_bestScore = (TextView)findViewById(R.id.textView_BestScore);
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //** Condição para implemenação de números aleatórios na atividade principal**//
+        //** Condição para implementação de números aleatórios na atividade principal**//
 
         int id;
         if (num_aleatorio == 0 || num_aleatorio == 10){
@@ -62,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
             iv_personagem.setImageResource(id);
         }
 
-        /**Ligação base de dados**/
+        /**Ligação para a base de dados**/
 
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();
 
-        //**Consulta base de dados e maior valor de score**/
+        //**Consulta a base de dados e maior valor de score através de Query**/
 
         Cursor consulta = BD.rawQuery(
                 "select * from pontos where score = (select max (score) from pontos)", null);
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    //** evitua utiliação de função regresso*//
+    //** Evitua utiliação de função regresso*//
     public void onBackPressed(){
 
     }

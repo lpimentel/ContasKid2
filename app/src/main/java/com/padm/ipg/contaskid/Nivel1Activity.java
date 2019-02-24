@@ -16,15 +16,18 @@ import android.widget.Toast;
 public class Nivel1Activity extends AppCompatActivity {
 
     //** Declaração dos objetos**//
+
     private TextView tv_nome, tv_score;
     private ImageView iv_Aum, iv_Adois, iv_vidas;
     private EditText et_resposta;
     private MediaPlayer mp, mp_great, mp_bad;
 
-//**Declaração de variáveis e vetor de correspondência às operações**//
+    //** Declaração de variáveis e vetor de correspondência às operações **//
 
     int score, numAleatorio_um, numAleatorio_dois, resultado, vidas = 3;
     String nome_jogador, string_score, string_vidas;
+
+    //** Array de strings - variável para guardar diversos valores//
 
     String numero [] = {"zero", "um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito","nove"};
 
@@ -36,7 +39,7 @@ public class Nivel1Activity extends AppCompatActivity {
 
         Toast.makeText(this, getString(R.string.Toast_NiveUM), Toast.LENGTH_SHORT).show();
 
-        //** Cricão das relações entre a parte lógica e gráfica **//
+        //** Cricão das relações entre a parte lógica e a parte gráfica **//
 
         tv_nome = (TextView)findViewById(R.id.textView_nome);
         tv_score = (TextView)findViewById(R.id.textView_score);
@@ -55,25 +58,28 @@ public class Nivel1Activity extends AppCompatActivity {
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //** Colocalão dos sons **//
+
         mp = MediaPlayer.create(this, R.raw.goats);
         mp.start();
         mp.setLooping(true);
 
         //** Carregamento de dados relativos sons de certo ou errado **//
+
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
-        //**Indica utilização do método aleatóruio do número**//
+        //** Indica a utilização do método aleatóruio do número **//
+
         NumAleatorio();
 
     }
 
-    // **Configuração de validação de resposta**//
+    //** Configuração de validação de resposta **//
 
     public void Comparar(View view){
         String resposta = et_resposta.getText().toString();
 
-        // **Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr**//
+        //** Configura a falta de resposta por parte do utilizador; som para acerto ou falha; número de vidasr **//
 
         if (!resposta.equals("")){
 
@@ -128,7 +134,7 @@ public class Nivel1Activity extends AppCompatActivity {
         }
     }
 
-    // **Método para criação de somas aleatórias cuja soma não seja maior que dez**//
+    //** Método para criação de somas aleatórias cuja soma não seja maior que dez **//
 
     public void NumAleatorio(){
 
@@ -157,12 +163,12 @@ public class Nivel1Activity extends AppCompatActivity {
 
             }
 
-            //** Passa para a próxima atividade**//
+            //** Passa para a próxima atividade **//
 
         }else {
             Intent intent = new Intent(this, Nivel2Activity.class);
 
-            //** Envia o nome e o score para a próxima atividade**//
+            //** Envia o nome e o score para a próxima atividade **//
 
             string_score = String.valueOf(score);
             string_vidas = String.valueOf(vidas);
@@ -170,7 +176,7 @@ public class Nivel1Activity extends AppCompatActivity {
             intent.putExtra("score", string_score);
             intent.putExtra("vidas", string_vidas);
 
-            //** Inicia a próxima atividade**//
+            //** Inicia a próxima atividade **//
 
             startActivity(intent);
             finish();
@@ -180,7 +186,8 @@ public class Nivel1Activity extends AppCompatActivity {
         }
 
     }
-    //** Implementa o score do jogador com maior pontuação**//
+    //** Implementa o score do jogador com maior pontuação **//
+
     public void BaseDeDados (){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();
@@ -217,7 +224,6 @@ public class Nivel1Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-
 
 
     }

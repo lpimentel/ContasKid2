@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 public class Nivel3Activity extends AppCompatActivity {
 
-    //** Declaração dos objetos**//
+    //** Declaração dos objetos **//
+
     private TextView tv_nome, tv_score;
     private ImageView iv_Aum, iv_Adois, iv_vidas;
     private EditText et_resposta;
@@ -23,7 +24,7 @@ public class Nivel3Activity extends AppCompatActivity {
 
 
 
-    //**Declaração de variáveis e vetor de correspondência às operações**//
+    //** Declaração de variáveis e vetor de correspondência às operações **//
 
     int score, numAleatorio_um, numAleatorio_dois, resultado, vidas = 3;
     String nome_jogador, string_score, string_vidas;
@@ -38,7 +39,7 @@ public class Nivel3Activity extends AppCompatActivity {
 
         Toast.makeText(this, getString(R.string.Toast_NiveTres), Toast.LENGTH_SHORT).show();
 
-        //** Cricão das relações entre a parte lógica e gráfica **//
+        //** Cricão das relações entre a parte lógica e parfte gráfica **//
 
         tv_nome = (TextView)findViewById(R.id.textView_nome);
         tv_score = (TextView)findViewById(R.id.textView_score);
@@ -47,18 +48,20 @@ public class Nivel3Activity extends AppCompatActivity {
         iv_Adois = (ImageView)findViewById(R.id.imageView_NumDois);
         et_resposta = (EditText)findViewById(R.id.editText_resultado);
 
-        //** Obtenção do nome do jogar proveniente do primeiro nível **//
+        //** Obtenção do nome do jogar proveniente do segundo nível **//
 
         nome_jogador = getIntent().getStringExtra("jogador");
         tv_nome.setText("Jogador: " + nome_jogador);
 
 
         //** Recupera o score **//
+
         string_score = getIntent().getStringExtra("score");
         score = Integer.parseInt(string_score);
         tv_score.setText("Score: " + score);
 
         //** Recupera as vidas **//
+
         string_vidas = getIntent().getStringExtra("vidas");
         vidas = Integer.parseInt(string_vidas);
         if(vidas == 3){
@@ -72,26 +75,29 @@ public class Nivel3Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //** Colocalão dos sons **//
+        //** Colocação dos sons ** //
+
         mp = MediaPlayer.create(this, R.raw.goats);
         mp.start();
         mp.setLooping(true);
 
         //** Carregamento de dados relativos sons de certo ou errado **//
+
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
-        //**Indica utilização do método aleatóruio do número**//
+        //** Indica utilização do método aleatório do número **//
+
         NumAleatorio();
 
     }
 
-    // **Configuração de validação de resposta**//
+    // ** Configuração de validação de resposta **//
 
     public void Comparar(View view){
         String resposta = et_resposta.getText().toString();
 
-        // **Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr**//
+        // ** Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr **//
 
         if(!resposta.equals("")){
 
@@ -146,7 +152,7 @@ public class Nivel3Activity extends AppCompatActivity {
         }
     }
 
-    // **Método para criação de somas subtrações cuja soma não seja maior que vinte**//
+    // ** Método para criação de somas subtrações cuja soma não seja maior que vinte **//
 
     public void NumAleatorio (){
 
@@ -157,7 +163,7 @@ public class Nivel3Activity extends AppCompatActivity {
 
             resultado = numAleatorio_um - numAleatorio_dois;
 
-            // **Condição para impedir números negativos**//
+            // ** Condição para impedir números negativos **//
 
             if (resultado>=0){
                 for (int i = 0; i  < numero.length; i++) {
@@ -176,7 +182,7 @@ public class Nivel3Activity extends AppCompatActivity {
 
 
 
-            //** Passa para a próxima atividade**//
+            //** Passa para a próxima atividade **//
 
         } else {
             Intent intent = new Intent(this, Nivel4Activity.class);
@@ -189,7 +195,7 @@ public class Nivel3Activity extends AppCompatActivity {
             intent.putExtra("score", string_score);
             intent.putExtra("vidas", string_vidas);
 
-            //** Inicia a próxima atividade**//
+            //** Inicia a próxima atividade **//
 
             startActivity(intent);
             finish();
@@ -199,7 +205,8 @@ public class Nivel3Activity extends AppCompatActivity {
         }
 
     }
-    //** Implementa o score do jogador com maior pontuação**//
+    //** Implementa o score do jogador com maior pontuação **//
+
     public void BaseDeDados (){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();

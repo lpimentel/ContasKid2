@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 public class Nivel4Activity extends AppCompatActivity {
 
-    //** Declaração dos objetos**//
+    //** Declaração dos objetos **//
+
     private TextView tv_nome, tv_score;
     private ImageView iv_Aum, iv_Adois, iv_vidas, iv_signo;
     private EditText et_resposta;
@@ -23,7 +24,7 @@ public class Nivel4Activity extends AppCompatActivity {
 
 
 
-    //**Declaração de variáveis e vetor de correspondência às operações**//
+    //** Declaração de variáveis e vetor de correspondência às operações **//
 
     int score, numAleatorio_um, numAleatorio_dois, resultado, vidas = 3;
     String nome_jogador, string_score, string_vidas;
@@ -48,18 +49,20 @@ public class Nivel4Activity extends AppCompatActivity {
         iv_signo = (ImageView)findViewById(R.id.imageView_signo);
         et_resposta = (EditText)findViewById(R.id.editText_resultado);
 
-        //** Obtenção do nome do jogar proveniente do primeiro nível **//
+        //** Obtenção do nome do jogar proveniente do terceiro nível **//
 
         nome_jogador = getIntent().getStringExtra("jogador");
         tv_nome.setText("Jogador: " + nome_jogador);
 
 
         //** Recupera o score **//
+
         string_score = getIntent().getStringExtra("score");
         score = Integer.parseInt(string_score);
         tv_score.setText("Score: " + score);
 
         //** Recupera as vidas **//
+
         string_vidas = getIntent().getStringExtra("vidas");
         vidas = Integer.parseInt(string_vidas);
         if (vidas ==3){
@@ -71,30 +74,32 @@ public class Nivel4Activity extends AppCompatActivity {
         }
 
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //** Colocalão dos sons **//
+        //** Colocação dos sons **//
+
         mp = MediaPlayer.create(this, R.raw.goats);
         mp.start();
         mp.setLooping(true);
 
-        //** Carregamento de dados relativos sons de certo ou errado **//
+        //** Carregamento de dados relativos a sons de certo ou errado **//
+
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
-        //**Indica utilização do método aleatóruio do número**//
+        //** Indica utilização do método aleatóruio do número **//
+
         NumAleatorio();
 
     }
 
-    // **Configuração de validação de resposta**//
+    // ** Configuração de validação de resposta **//
 
     public void Comparar(View view){
         String resposta = et_resposta.getText().toString();
 
-        // **Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr**//
+        // ** Configura falta de resposta por parte do utilizador; som para acerto ou falha; número de vidas **//
 
         if (!resposta.equals("")){
 
@@ -149,7 +154,7 @@ public class Nivel4Activity extends AppCompatActivity {
         }
     }
 
-    // **Método para criação de somas e subtrações cuja soma não seja menor que 40**//
+    // ** Método para criação de somas e subtrações cuja soma não seja menor que 40 **//
 
     public void NumAleatorio (){
 
@@ -187,7 +192,7 @@ public class Nivel4Activity extends AppCompatActivity {
 
 
 
-            //** Passa para a próxima atividade**//
+            //** Passa para a próxima atividade **//
 
         } else {
             Intent intent = new Intent(this, Nivel5Activity.class);
@@ -200,7 +205,7 @@ public class Nivel4Activity extends AppCompatActivity {
             intent.putExtra("score", string_score);
             intent.putExtra("vidas", string_vidas);
 
-            //** Inicia a próxima atividade**//
+            //** Inicia a próxima atividade **//
 
             startActivity(intent);
             finish();
@@ -210,7 +215,8 @@ public class Nivel4Activity extends AppCompatActivity {
         }
 
     }
-    //** Implementa o score do jogador com maior pontuação**//
+    //** Implementa o score do jogador com maior pontuação **//
+
     public void BaseDeDados (){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();
