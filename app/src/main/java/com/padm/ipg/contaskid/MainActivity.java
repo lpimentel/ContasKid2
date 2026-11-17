@@ -1,124 +1,88 @@
 package com.padm.ipg.contaskid;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
+    private EditText playerInput;
+    private MediaPlayer introAudio;
 
-    //** Declaração dos objetos para cada campo **//
-
-    private EditText et_nome;
-    private ImageView iv_personagem;
-    private TextView tv_bestScore;
-    private MediaPlayer mp;
-
-
-    //** Declaração de variável tipo inteiro com casting **//
-
-    int num_aleatorio = (int) (Math.random() * 10);
+    private static final int[] CHARACTERS = {
+        R.drawable.ini1, R.drawable.ini2, R.drawable.ini3,
+        R.drawable.ini4, R.drawable.ini5, R.drawable.ini6
+    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle state) {
+        super.onCreate(state);
         setContentView(R.layout.activity_main);
 
-    //** Relação entre a parte lógica e a parte gráfica **//
-        et_nome = (EditText)findViewById(R.id.txt_nome);
-        iv_personagem = (ImageView)findViewById(R.id.imageView_Personagem);
-        tv_bestScore = (TextView)findViewById(R.id.textView_BestScore);
+        playerInput = findViewById(R.id.txt_nome);
+        ImageView character = findViewById(R.id.imageView_Personagem);
+        TextView bestScore = findViewById(R.id.textView_BestScore);
+        character.setImageResource(CHARACTERS[new Random().nextInt(CHARACTERS.length)]);
 
-
-        //** Coloca icons na barra action bar **//
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-
-        //** Condição para implementação de números aleatórios na atividade principal**//
-
-        int id;
-        if (num_aleatorio == 0 || num_aleatorio == 10){
-            id = getResources().getIdentifier("ini1", "drawable", getPackageName());
-            iv_personagem.setImageResource(id);
-        }   else if (num_aleatorio == 1 || num_aleatorio == 9){
-            id = getResources().getIdentifier("ini2", "drawable", getPackageName());
-            iv_personagem.setImageResource(id);
-        }   else if (num_aleatorio == 2 || num_aleatorio == 8){
-            id = getResources().getIdentifier("ini3", "drawable", getPackageName());
-            iv_personagem.setImageResource(id);
-        }   else if (num_aleatorio == 3 || num_aleatorio == 7){
-            id = getResources().getIdentifier("ini4", "drawable", getPackageName());
-            iv_personagem.setImageResource(id);
-        }   else if (num_aleatorio == 4 || num_aleatorio == 5 || num_aleatorio == 6){
-            id = getResources().getIdentifier("ini5", "drawable", getPackageName());
-            iv_personagem.setImageResource(id);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         }
 
-        /**Ligação para a base de dados**/
-
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BD", null, 1);
-        SQLiteDatabase BD = admin.getWritableDatabase();
-
-        //**Consulta a base de dados e maior valor de score através de Query**/
-
-        Cursor consulta = BD.rawQuery(
-                "select * from pontos where score = (select max (score) from pontos)", null);
-        if (consulta.moveToFirst()){
-
-            String temp_nome = consulta.getString(0);
-            String temp_score = consulta.getString(1);
-            tv_bestScore.setText("Record: " + temp_score + " - " + temp_nome);
-            BD.close();
-        } else {
-            BD.close();
+        try (AdminSQLiteOpenHelper store = new AdminSQLiteOpenHelper(this)) {
+            AdminSQLiteOpenHelper.Record record = store.getBestScore();
+            if (record != null) {
+                bestScore.setText(getString(R.string.best_score_format, record.score, record.name));
+            }
         }
-
-        //** Implementa sons na atividade inicial **//
-
-        mp = MediaPlayer.create(this, R.raw.alphabet_song);
-        mp.start();
-        mp.setLooping(true);
-    }
-
-    public void Jogar(View view){
-        String nome = et_nome.getText().toString();
-
-        //** Libera recursos **//
-        if(!nome.equals("")){
-            mp.stop();
-            mp.release();
-
-            //** Implementa uma nova atividade **//
-            Intent intent = new Intent(this, Nivel1Activity.class);
-
-            intent.putExtra("jogador", nome);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, getString(R.string.toast_introduzNome), Toast.LENGTH_SHORT).show();
-
-            et_nome.requestFocus();
-            InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(et_nome, InputMethodManager.SHOW_IMPLICIT);
-        }
-
-
     }
 
     @Override
-    //** Evitua utiliação de função regresso*//
-    public void onBackPressed(){
-
+    protected void onStart() {
+        super.onStart();
+        introAudio = MediaPlayer.create(this, R.raw.alphabet_song);
+        if (introAudio != null) {
+            introAudio.setLooping(true);
+            introAudio.start();
+        }
     }
 
-}
+    @Override
+    protected void onStop() {
+        if (introAudio != null) {
+            introAudio.release();
+            introAudio = null;
+        }
+        super.onStop();
+    }
 
+    /** Bound to the Play button in activity_main.xml. */
+    public void Jogar(View view) {
+        String name = playerInput.getText().toString().trim();
+        if (name.isEmpty()) {
+            Toast.makeText(this, R.string.toast_introduzNome, Toast.LENGTH_SHORT).show();
+            playerInput.requestFocus();
+            InputMethodManager input = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (input != null) {
+                input.showSoftInput(playerInput, InputMethodManager.SHOW_IMPLICIT);
+            }
+            return;
+        }
+        Intent intent = new Intent(this, Nivel1Activity.class);
+        intent.putExtra("jogador", name);
+        intent.putExtra("score", 0);
+        intent.putExtra("vidas", 3);
+        startActivity(intent);
+        finish();
+    }
+}
